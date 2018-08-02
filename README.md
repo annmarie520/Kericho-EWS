@@ -1,2 +1,0 @@
-"# Kericho-EWS" 
-"Kericho-EWS"
