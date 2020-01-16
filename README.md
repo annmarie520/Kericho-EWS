@@ -3,6 +3,8 @@ code to accompany Evidence of Critical Slowing Down Prior to Malaria Resurgence 
 
 
 ```{r eval=TRUE, echo=FALSE}
+library(knitr)
+
 mat<-rbind(c(paste("indics","cors","pvals", sep="\n"), 
              paste("indics","cors_spearman","pvals_spearman", sep="\n")),
            c(paste("indics_sa","cors_sa","pvals_sa", sep="\n"), 
@@ -20,7 +22,10 @@ rownames(mat)<-c(paste("TEST AT TRANSITION:", "Bandwidth: 40", "Notional month o
                  paste("ROLLING FORECAST:", "Bandwidth: 40", "Month of EWS testing:", "Feb 1984 - Apr 1994" sep="\n")
 )
 
-library(knitr)
 kable(mat) 
 ```
 
+```{r eval=TRUE, echo=FALSE}
+library(knitr)
+kable(mat) 
+```
