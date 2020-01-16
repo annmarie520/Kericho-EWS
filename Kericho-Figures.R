@@ -1,52 +1,8 @@
-load("pvals")
-load("cors")
-load("indics")
-library(gplots)
-
-pval<-list()
-pval$acf<-pval$var<-pval$dv<-matrix(nrow=11, ncol=25)
-for(bw in 1:11){
-  for(end in 1:25){
-    pval$acf[bw,end]<-pvals[[end]][[bw]][1]
-    pval$var[bw,end]<-pvals[[end]][[bw]][2]
-    pval$dv[bw,end]<-pvals[[end]][[bw]][3]
-  }
-}
-
-
-#Significance Analyses: Heatmap of P-Values
-times<-sapply(328:352, function(x) paste(kericho$Month[x], substr(toString(kericho$YYYY[x]),3,4)))
-heatmap.2(pval$acf, colsep=c(12,13), rowsep=c(5,6), main="Autocorrelation", col=terrain.colors(500), labCol=times, labRow=35:45, ylab="Bandwidth", Rowv=FALSE, Colv=FALSE, dendrogram="none", trace="none", cellnote=round(pval$acf, digits=3), notecol="black", sepcolor="white", scale="none")
-heatmap.2(pval$var, colsep=c(12,13), rowsep=c(5,6), main="Variance", col=terrain.colors(500), labCol=times, labRow=35:45, ylab="Bandwidth", Rowv=FALSE, Colv=FALSE, dendrogram="none", trace="none", cellnote=round(pval$var, digits=3), notecol="black", sepcolor="white", scale="none")
-heatmap.2(pval$dv, colsep=c(12,13), rowsep=c(5,6),main="Second Difference of Variance", col=terrain.colors(500), labCol=times, labRow=35:45, ylab="Bandwidth", Rowv=FALSE, Colv=FALSE, dendrogram="none", trace="none", cellnote=round(pval$dv, digits=3), notecol="black", sepcolor="white", scale="none")
-
-
-#Significance Analyses: Across the rows are the statistical indicators. The top row shows variation in end of critical window and the bottom rows shows variation in bandwidth. 
-par(mfrow=c(2,3))
-col<-c(rep("black",12),"red",rep("black",12))
-plot(pval$acf[5,], xaxt="n",ylab="P-Value", main="Autocorrelation", col=col, xlab=NA)
-axis(1, at=1:25, labels=times, las=2)
-mtext("Month of Critical Transition", side=1, line=4, cex=.8)
-
-plot(pval$var[5,], xaxt="n",ylab="P-Value", main="Variance", col=col, xlab=NA)
-axis(1, at=1:25, labels=times, las=2)
-mtext("Month of Critical Transition", side=1, line=4, cex=.8)
-
-plot(pval$dv[5,], xaxt="n", ylab="P-Value", main="First Difference of Variance", col=col, xlab=NA)
-axis(1, at=1:25, labels=times, las=2)
-mtext("Month of Critical Transition", side=1, line=4, cex=.8)
-
-col=c(rep("black",5),"red",rep("black",5))
-plot(35:45, pval$acf[,13], ylab="P-Value",col=col, xlab="Bandwidth", main="Autocorrelation")
-
-plot(35:45, pval$var[,13], ylab="P-Value",col=col, xlab="Bandwidth", main="Variance")
-
-plot(35:45, pval$dv[,13],  ylab="P-Value",col=col, xlab="Bandwidth", main="First Difference of Variance")
-
-#FIG 1: Time series with approach to criticality shaded
+####FIG 1: Time series with approach to criticality shaded####
+kericho<-read.csv("kericho.csv")
 par(mfrow=c(1,1))
 plot(kericho$BBK, main="Time Series of Malaria Incidence in Kericho", type="h", ylab="Cases Reported", xlab="Time", xaxt='n', ylim=c(0, 400), cex.main=2, cex.lab=1.5, cex.axis=1.5)
-rect(beg,-30,344,450, col="gray", border=NA)
+rect(204,-30,344,450, col="gray", border=NA)
 box()
 lines(kericho$BBK, type="h")
 lines(345:415, kericho$BBK[345:415], type="h", lwd=2)
@@ -61,58 +17,119 @@ lines(x=c(406,415,415), y=c(390, 390, 385))
 newyears=which(kericho$Month=="Jan")
 axis(1, at = newyears, labels = 1965:2002, tick = TRUE,cex.axis=1.5, cex.lab=1.5)
 
-#FIG 2: Line graphs of each rolling window statistic over time (left), null distributions of tau for each statistic with test value shaded (right)
+####FIG 2: Line graphs of each rolling window statistic over time (top), null distributions of tau for each statistic with test value shaded (bottom)####
+load("pvals")
+load("cors")
+load("indics")
+kericho<-read.csv("kericho.csv")
+
 par(mfcol=c(3,2), mai=c(0.82,0.82,0.42,1.2))
+newyears=which(kericho$Month=="Jan")
 newyears2<-newyears[18:29]-beg+1
 
-the_cors<-cors[[13]][[6]]
-the_indics<-indics[[13]][[6]]
 
-#Returns values: correlation coefficients and P-Values
-the_cors[10001,]
-pvals[[13]][[6]]
+#top half: rolling window statistics over time, overlaying case data
+par(mfrow=c(4, 5), mai = c(.5, 0.6, .5,.5))
+for(i in 1:10){  
+  plot(204:340, kericho$BBK[204:340]*.5, main=names(indics)[i], type="h", cex.main=1.5, cex.axis=1.2, xlab=NA, ylim=c(0,100), ylab="Cases", xaxt='n', cex.lab=1.5)
+  axis(1, at=newyears, labels = 65:102, cex.axis=1.5)
+  par(new = T)
+  plot(indics[[i]],type='l', main=NA, axes=F, ylab=NA, xlab="Time (Years)", lwd=2, col="red", cex.lab=1.5)
+  axis(side = 4, cex.axis=1.2)
+}
 
-#left column: rowlling window statistics over time, overlaying case data
-plot(204:340, kericho$BBK[204:340]*.5, type="h", cex.main=1.5, xlab=NA, ylim=c(0,100), ylab="Number of cases reported", xaxt='n', cex.lab=1.5)
-axis(1, at=newyears, labels = 1965:2002)
-par(new = T)
-plot(the_indics$autocorrelation,type='l', main="Indicators During Approach to Criticality", axes=F, ylab=NA, xlab=NA, lwd=2, ylim=c(.25, .7),col="red")
-axis(side = 4)
-mtext(side = 4, line = 3, "Autocorrelation")
-
-plot(204:340, kericho$BBK[204:340]*.5, type="h", cex.main=1.5, xlab=NA, ylim=c(0,100), ylab="Number of cases reported", xaxt='n', cex.lab=1.5)
-axis(1, at=newyears, labels = 1965:2002)
-par(new = T)
-plot(the_indics$variance,type='l', main="Indicators During Approach to Criticality", axes=F, ylab=NA, xlab=NA, lwd=2,col="red")
-axis(side = 4)
-mtext(side = 4, line = 3, "Variance")
-
-plot(204:340, kericho$BBK[204:340]*.5, type="h", cex.main=1.5, xlab=NA, ylim=c(0,100), ylab="Number of cases reported", xaxt='n', cex.lab=1.5)
-axis(1, at=newyears, labels = 1965:2002)
-par(new = T)
-plot(the_indics$variance_first_diff,type='l', main="Indicators During Approach to Criticality", axes=F, ylab=NA, xlab=NA, lwd=2, ylim=c(-50,150), col="red")
-axis(side = 4)
-mtext(side = 4, line = 3, "First Difference of Variance")
-
-#right column: null distribution of correlation coefficients, with test statistics given in red
-h<-hist(the_cors[1:10000,1], breaks=40, plot=FALSE)
-bin<-cut(the_cors[10001,1], h$breaks)
-clr<-rep("white",  length(h$counts))
-clr[bin]<-"red"
-plot(h, col=clr, main="Null Distribution of Tau", xlab=NA, ylab="Frequency", cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)
+#bottom half: null distribution of correlation coefficients, with test statistics given in red
+for(i in 1:10){
+  h<-hist(as.numeric(cors[1:10000,i]), breaks=40, plot=FALSE)
+  bin<-cut(as.numeric(cors[10001,i]), h$breaks)
+  clr<-rep("white",  length(h$counts))
+  clr[bin]<-"red"
+  plot(h, col=clr, main=colnames(cors)[i], xlab=NA, ylab="Frequency", cex.lab=1.5, cex.axis=1.2, cex.main=1.5, cex.sub=1.5)
+}
 
 
-h<-hist(the_cors[1:10000,2], breaks=40, plot=FALSE)
-bin<-cut(the_cors[10001,2], h$breaks)
-clr<-rep("white",  length(h$counts))
-clr[bin]<-"red"
-plot(h, col=clr, xlab=NA, ylab="Frequency", main=NA,cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)
+####FIG 3: Rolling forecast p-values####
+load("pvals_rf")
+
+par(mfrow=c(2,5))
+for(i in 1:10){
+  plot(sapply(pvals_rf, function(x) x[[i]]), xaxt='n', lwd=2, cex.main=2, cex.lab=1.5, cex.axis=1.2, xlab="Time to Transition (Months)", ylab=NA, ylim=c(0,.3), main=names(pvals_rf[[1]][i]), type="l")
+  abline(h=.05, col="red", lty=2)
+  abline(h=.01, col="red", lty=3)
+  axis(side=1, at=seq(0,length(pvals_rf), by=20), labels=seq(length(pvals_rf),0, by=-20), cex.axis=1.2)
+}
 
 
-h<-hist(the_cors[1:10000,3], breaks=40, plot=FALSE)
-bin<-cut(the_cors[10001,3], h$breaks)
-clr<-rep("white",  length(h$counts))
-clr[bin]<-"red"
-plot(h, col=clr, xlab="Tau", ylab="Frequency", main=NA,cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)
 
+####SUPPLEMENTARY FIG S2.1: : rolling forecast p-values for Spearman's correlation coefficient####
+load("pvals_rf_spearman")
+load("pvals_rf")
+par(mfrow=c(5,2))
+for(i in 1:10){
+  plot(sapply(pvals_rf_spearman, function(x) x[[i]]), xaxt='n', lwd=2, cex.main=2, cex.lab=1.5, cex.axis=1.2, xlab="Time to Transition (Months)", ylab="p-value", ylim=c(0,.3), main=names(pvals_rf[[1]][i]), type="l", col="blue", lty=3)
+  lines(sapply(pvals_rf, function(x) x[[i]]))
+  abline(h=.05, col="red", lty=2)
+  abline(h=.01, col="red", lty=3)
+  axis(side=1, at=seq(0,length(pvals_rf_spearman), by=20), labels=seq(length(pvals_rf),0, by=-20), cex.axis=1.2)
+}
+
+
+####SUPPLEMENTARY FIGS S1.1-10: Significance Analyses/Heatmap of p-values####
+#will automatically save plots as pngs with prefix "heatmap"
+library(gplots)
+library(viridis)
+
+load("pvals_sa")
+kericho <- read.csv("kericho.csv")
+stat_names<-names(pvals_sa[[1]][[1]])
+
+pval<-lapply(1:10, matrix, data=NA, nrow=11, ncol=25)
+names(pval)<-stat_names
+
+for(bw in 1:11){
+  for(end in 1:25){
+    for(stat in stat_names){
+      pval[[stat]][bw,end]<-pvals_sa[[end]][[bw]][[stat]]
+    }
+  }
+}
+
+times<-sapply(328:352, function(x) paste(kericho$Month[x], substr(toString(kericho$YYYY[x]),3,4)))
+
+for(i in 1:length(pval)){
+  mat<-pval[[i]]
+  mat2<-apply(mat,2,rev) #reflects matrix, intermediate in properly transforming matrix to recolor cell notes
+  heatmap.2(mat, notecex=1.2, colsep=c(12,13),lmat = rbind(c(0,3,0),c(0,1,1),c(2,4,0)), rowsep=c(5,6), key.xlab="p-value", key.title="", breaks=0:500*.0005, col=viridis(500), labCol=times, labRow=35:45, Rowv=FALSE, Colv=FALSE, dendrogram="none", trace="none", cellnote=format(round(mat, digits=3), nsmall = 3) , notecol=t(ifelse(mat2>.2,"black", "white")), sepcolor="white", scale="none", lwid = c(.3, 4,.5), lhei=c(.5,4,1), cexRow=1.5, cexCol=1.5, key=TRUE, density.info="none", main=paste("                     ", names(pval[i])), keysize=3, key.par=list(cex.axis=1.5, cex.lab=1.5))
+  dev.copy(png, paste("heatmap", i, '.png', sep=""), width = 960, height = 640)
+  dev.off()
+}
+
+####Significance Analyses/Heatmap of p-values for Spearman coefficient (not included in manuscript/supplement)####
+#will automatically save plots as pngs with prefix "heatmap_spearman"
+library(gplots)
+library(viridis)
+load("pvals_sa_spearman")
+kericho <- read.csv("kericho.csv")
+stat_names<-names(pvals_sa_spearman[[1]][[1]])
+
+pval<-lapply(1:10, matrix, data=NA, nrow=11, ncol=25)
+names(pval)<-stat_names
+
+for(bw in 1:11){
+  for(end in 1:25){
+    for(stat in stat_names){
+      pval[[stat]][bw,end]<-pvals_sa_spearman[[end]][[bw]][[stat]]
+    }
+  }
+}
+
+times<-sapply(328:352, function(x) paste(kericho$Month[x], substr(toString(kericho$YYYY[x]),3,4)))
+
+for(i in 1:length(pval)){
+  mat<-pval[[i]]
+  mat2<-apply(mat,2,rev) #reflects matrix, intermediate in properly transforming matrix to recolor cell notes
+  heatmap.2(mat, notecex=1.2, colsep=c(12,13),lmat = rbind(c(0,3,0),c(0,1,1),c(2,4,0)), rowsep=c(5,6), key.xlab="p-value", key.title="", breaks=0:500*.0005, col=viridis(500), labCol=times, labRow=35:45, Rowv=FALSE, Colv=FALSE, dendrogram="none", trace="none", cellnote=format(round(mat, digits=3), nsmall = 3) , notecol=t(ifelse(mat2>.2,"black", "white")), sepcolor="white", scale="none", lwid = c(.3, 4,.5), lhei=c(.5,4,1), cexRow=1.5, cexCol=1.5, key=TRUE, density.info="none", main=paste("                     ", names(pval[i])), keysize=3, key.par=list(cex.axis=1.5, cex.lab=1.5))
+  dev.copy(png, paste("heatmap_spearman", i, '.png', sep=""), width = 960, height = 640)
+  dev.off()
+}
 
