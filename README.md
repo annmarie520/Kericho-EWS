@@ -3,17 +3,29 @@ code to accompany Evidence of Critical Slowing Down Prior to Malaria Resurgence 
 
 This repository contains code to conduct all computations and generate all figures discussed in the manuscript:
 Harris MJ, Hay SI, Drake JM. 2020 Evidence of Critical Slowing Down Prior to Malaria Resurgence in Kericho, Kenya (In Review).
+
 All analyses were conducted in RStudio using R version 3.5.1
+
 The script Kericho-Computations.R generates all computations used in this manuscript and saves them. All outputs of this script are also available in this repository, with variable names explained below. This uses the package spaero (version 0.4.0) and the dataset kericho.csv
+
 The script Kericho-Figures.R generates all figures used in this manuscript and saves them. This script utilizes the files: kericho.csv, indics, cors, pvals, pvals_sa, pvals_sa_spearman, pvals_sa, and pvals_sa_spearman. Each figure is separated into a self-contained section (demarcated by a comment with starting and ending ####). The figure sections and their required files and packages are as follows.
-•	FIG 1: Time series with approach to criticality shaded – kericho.csv
-•	FIG 2: Line graphs of each rolling window statistic over time (top), null distributions of tau for each statistic with test value shaded (bottom) – pvals, cors, indics, kericho.csv
-•	FIG 3: Rolling forecast p-values - pvals_rf
-•	SUPPLEMENTARY FIG S2.1: rolling forecast p-values for Spearman’s correlation coefficient – pvals_rf_spearman, pvals_rf
-•	SUPPLEMENTARY FIGS S1.1-10: Significance Analyses/Heatmap of p-values – pvals_sa, kericho.csv, gplots (version 3.0.1) package, viridis (version 0.5.1) package
-•	Significance Analyses/Heatmap of p-value for Spearman coefficient (not included in manuscript/supplement) – pvals_sa_spearman, kericho.csv, gplots (version 3.0.1) package, viridis (version 0.5.1) package
+
+*	FIG 1: Time series with approach to criticality shaded – kericho.csv
+
+*	FIG 2: Line graphs of each rolling window statistic over time (top), null distributions of tau for each statistic with test value shaded (bottom) – pvals, cors, indics, kericho.csv
+
+*	FIG 3: Rolling forecast p-values - pvals_rf
+
+*	SUPPLEMENTARY FIG S2.1: rolling forecast p-values for Spearman’s correlation coefficient – pvals_rf_spearman, pvals_rf
+
+*	SUPPLEMENTARY FIGS S1.1-10: Significance Analyses/Heatmap of p-values – pvals_sa, kericho.csv, gplots (version 3.0.1) package, viridis (version 0.5.1) package
+
+*	Significance Analyses/Heatmap of p-value for Spearman coefficient (not included in manuscript/supplement) – pvals_sa_spearman, kericho.csv, gplots (version 3.0.1) package, viridis (version 0.5.1) package
 
 ## VARIABLE NAMES
+
+Monthly malaria incidence in Kericho, Kenya between January 1965 and November 2002 is given by kericho.csv
+
 The intermediate data for all stages of the analysis in the manuscript and supplementary analyses are provided in the Github (fourteen files). The table below gives variable names by the methods used to generate them (testing parameters by correlation coefficient used). 
 
 |                                                                                                                  | <br>Correlation coefficient:<br>Kendall's τ | <br>Correlation Coefficient:<br>Spearman's ρ       |
