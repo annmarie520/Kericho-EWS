@@ -33,8 +33,10 @@ The intermediate data for all stages of the analysis in the manuscript and suppl
 |                                                                                                                  | <br>Correlation coefficient:<br>Kendall's τ | <br>Correlation Coefficient:<br>Spearman's ρ       |
 |------------------------------------------------------------------------------------------------------------------|----------------------------------------------|----------------------------------------------------|
 | TEST AT TRANSITION:<br>Bandwidth: 40<br>Notional month of critical<br>transition: Apr 1993                       | indics<br>cors<br>pvals<br>                  | indics<br>cors_spearman<br>pvals_spearman          |
-| SENSITIVITY ANALYSIS:<br>Bandwidth: 35 - 45<br>Notional month of critical<br>transition: <br>Apr 1992 - Apr 1994 | indics_sa<br>cors_sa<br>pvals_sa<br>         | indics_sa<br>cors_sa_spearman<br>pvals_sa_spearman |
 | ROLLING FORECAST:<br>Bandwidth: 40<br>Month of EWS testing: <br>Feb 1984 - Apr 1994                              | indics*<br>cors_rf<br>pvals_rf               | indics*<br>cors_rf_spearman<br>pvals_rf_spearman   |
+| ROLLING TW:<br>Bandwidth: 40<br>Month of EWS testing: <br>(Jly 81-May 82) - (Mar 93 - Jan 94)                              | cors_tw<br>pvals_tw               | N/A   |
+| SENSITIVITY ANALYSIS:<br>Bandwidth: 35 - 45<br>Notional month of critical<br>transition: <br>Apr 1992 - Apr 1994 | indics_sa<br>cors_sa<br>pvals_sa<br>         | indics_sa<br>cors_sa_spearman<br>pvals_sa_spearman |
+
 
 *Holds the indicator values from December 1981 through April 1994. Can be subset through a given n months after December 1981 using the command:
 ```indics <- lapply(indics, function(x) x[1:n]) ```
