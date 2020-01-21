@@ -28,7 +28,7 @@ The script Kericho-Figures.R generates all figures used in this manuscript and s
 
 Monthly malaria incidence in Kericho, Kenya between January 1965 and November 2002 is given by kericho.csv
 
-The intermediate data for all stages of the analysis in the manuscript and supplementary analyses are provided in the Github (fourteen files). The table below gives variable names by the methods used to generate them (testing parameters by correlation coefficient used). 
+The intermediate data for all stages of the analysis in the manuscript and supplementary analyses are provided in the Github (sixteen files). The table below gives variable names by the methods used to generate them (testing parameters by correlation coefficient used). 
 
 |                                                                                                                  | <br>Correlation coefficient:<br>Kendall's τ | <br>Correlation Coefficient:<br>Spearman's ρ       |
 |------------------------------------------------------------------------------------------------------------------|----------------------------------------------|----------------------------------------------------|
