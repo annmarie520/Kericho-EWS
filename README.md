@@ -34,8 +34,8 @@ The intermediate data for all stages of the analysis in the manuscript and suppl
 |------------------------------------------------------------------------------------------------------------------|----------------------------------------------|----------------------------------------------------|
 | TEST AT TRANSITION:<br>Bandwidth: 40<br>Notional month of critical<br>transition: Apr 1993                       | indics<br>cors<br>pvals<br>                  | indics<br>cors_spearman<br>pvals_spearman          |
 | ROLLING FORECAST:<br>Bandwidth: 40<br>Month of EWS testing: <br>Feb 1984 - Apr 1994                              | indics*<br>cors_rf<br>pvals_rf               | indics*<br>cors_rf_spearman<br>pvals_rf_spearman   |
-| ROLLING TW:<br>Bandwidth: 40<br>Month of EWS testing: <br>(Jly 81-May 82) - (Mar 93 - Jan 94)                              | cors_tw<br>pvals_tw               | N/A   |
-| SENSITIVITY ANALYSIS:<br>Bandwidth: 35 - 45<br>Notional month of critical<br>transition: <br>Apr 1992 - Apr 1994 | indics_sa<br>cors_sa<br>pvals_sa<br>         | indics_sa<br>cors_sa_spearman<br>pvals_sa_spearman |
+| SENSITIVITY ANALYSIS 1:<br>Bandwidth: 40<br>Month of EWS testing: <br>(Jly 81-May 82) - (Mar 93 - Jan 94)                              | cors_tw<br>pvals_tw               | N/A   |
+| SENSITIVITY ANALYSIS 2:<br>Bandwidth: 35 - 45<br>Notional month of critical<br>transition: <br>Apr 1992 - Apr 1994 | indics_sa<br>cors_sa<br>pvals_sa<br>         | indics_sa<br>cors_sa_spearman<br>pvals_sa_spearman |
 
 
 *Holds the indicator values from December 1981 through April 1994. Can be subset through a given n months after December 1981 using the command:
@@ -48,13 +48,18 @@ The intermediate data for all stages of the analysis in the manuscript and suppl
 
 ```cors``` and ```cors_spearman``` are matrices with 10,001 rows and 10 columns, with the first 10,000 rows reporting correlation coefficients for all ten indicators for the corresponding null model and the final row (cors[10001,]) giving the correlation coefficients for the Kericho data. 
 
-```cors_sa[[i]][[j]]``` and ```cors_sa_spearman[[i]][[j]]``` returns a matrix with the same format as cors and cors_spearman, where the ith entry corresponds to a notional month of critical transition  i months since March 1992 and the jth entry corresponds to a bandwidth size of 34+j (1 ≤ i ≤ 25 ; 1 ≤ j ≤ 11).
+```cors_rf``` and ```cors_rf_spearman``` are lists of length 96 where the ith entry corresponds to early warning signal testing beginning in December 1981 and ending i months after April 1985. Each entry of this list is a matrix with the same format as cors and cors_spearman.
 
-```cors_rf``` and ```cors_rf_spearman``` are lists of length 110 where the ith entry corresponds to early warning signal testing beginning in December 1981 and ending i months after January 1984. Each entry of this list is a matrix with the same format as cors and cors_spearman.
+```cors_tw[[i]][[j]]``` returns a matrix with the same format as cors, where the ith entry corresponds to a notional month of beginning of approach to criticality i months since November 1987 and the jth entry corresponds to a notional month of beginning of approach to criticality i months since March 1993 (1 ≤ i ≤ 11 ; 1 ≤ j ≤ 11).
+
+```cors_sa[[i]][[j]]``` and ```cors_sa_spearman[[i]][[j]]``` returns a matrix with the same format as cors and cors_spearman, where the ith entry corresponds to a notional month of critical transition  i months since March 1992 and the jth entry corresponds to a bandwidth size of 34+j (1 ≤ i ≤ 25 ; 1 ≤ j ≤ 11).
 
 ```pvals``` and ```pvals_spearman``` returns a vector of the p-values corresponding to all ten indicators.
 
+```pvals_rf``` and ```pvals_rf_spearman``` are lists of length 96 where the ith entry corresponds to early warning signal testing beginning in December 1981 and ending i months after April 1985. Each entry of this list is a vector with the same format as ```pvals``` and ```pvals_spearman```.
+
+```pvals_tw[[i]][[j]]``` returns a vector with the same format as pvals, where the ith entry corresponds to a notional month of beginning of approach to criticality i months since November 1987 and the jth entry corresponds to a notional month of beginning of approach to criticality i months since March 1993 (1 ≤ i ≤ 11 ; 1 ≤ j ≤ 11).
+
 ```pvals_sa[[i]][[j]]``` and ```cors_sa_spearman[[i]][[j]]``` return a vector with the same format as pvals and pvals_spearman, where the ith entry corresponds to a notional month of critical transition  i months since March 1992 and the jth entry corresponds to a bandwidth size of 34+j (1 ≤ i ≤ 25 ; 1``` ≤ j ```≤ 11).
 
-```pvals_rf``` and ```pvals_rf_spearman``` are lists of length 110 where the ith entry corresponds to early warning signal testing beginning in December 1981 and ending i months after January 1984. Each entry of this list is a vector with the same format as ```pvals``` and ```pvals_spearman```.
 
