@@ -60,6 +60,6 @@ The intermediate data for all stages of the analysis in the manuscript and suppl
 
 ```pvals_tw[[i]][[j]]``` returns a vector with the same format as pvals, where the ith entry corresponds to a notional month of beginning of approach to criticality i months since November 1987 and the jth entry corresponds to a notional month of beginning of approach to criticality i months since March 1993 (1 ≤ i ≤ 11 ; 1 ≤ j ≤ 11).
 
-```pvals_sa[[i]][[j]]``` and ```cors_sa_spearman[[i]][[j]]``` return a vector with the same format as pvals and pvals_spearman, where the ith entry corresponds to a notional month of critical transition  i months since March 1992 and the jth entry corresponds to a bandwidth size of 34+j (1 ≤ i ≤ 25 ; 1``` ≤ j ```≤ 11).
+```pvals_sa[[i]][[j]]``` and ```cors_sa_spearman[[i]][[j]]``` return a vector with the same format as pvals and pvals_spearman, where the ith entry corresponds to a notional month of critical transition  i months since March 1992 and the jth entry corresponds to a bandwidth size of 34+j (1 ≤ i ≤ 25 ; 1 ≤ j ≤ 11).
 
 
