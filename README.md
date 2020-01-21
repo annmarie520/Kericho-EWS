@@ -8,7 +8,7 @@ All analyses were conducted in RStudio using R version 3.5.1
 
 The script Kericho-Computations.R generates all computations used in this manuscript and saves them. All outputs of this script are also available in this repository, with variable names explained below. This uses the package spaero (version 0.4.0) and the dataset kericho.csv
 
-The script Kericho-Figures.R generates all figures used in this manuscript and saves them. This script utilizes the files: kericho.csv, indics, cors, pvals, pvals_sa, pvals_sa_spearman, pvals_sa, and pvals_sa_spearman. Each figure is separated into a self-contained section (demarcated by a comment with starting and ending ####). The figure sections and their required files and packages are as follows.
+The script Kericho-Figures.R generates all figures used in this manuscript and saves them. This script utilizes the files: kericho.csv, indics, cors, pvals, pvals_rf, pvals_tw, pvals_sa, and pvals_sa_spearman, pvals_rf_spearman. Each figure is separated into a self-contained section (demarcated by a comment with starting and ending ####). The figure sections and their required files and packages are as follows.
 
 *	FIG 1: Time series with approach to criticality shaded – kericho.csv
 
@@ -16,9 +16,11 @@ The script Kericho-Figures.R generates all figures used in this manuscript and s
 
 *	FIG 3: Rolling forecast p-values - pvals_rf
 
-*	SUPPLEMENTARY FIG S2.1: rolling forecast p-values for Spearman’s correlation coefficient – pvals_rf_spearman, pvals_rf
+*	SUPPLEMENTARY FIG S3: rolling forecast p-values for Spearman’s correlation coefficient – pvals_rf_spearman, pvals_rf
 
-*	SUPPLEMENTARY FIGS S1.1-10: Significance Analyses/Heatmap of p-values – pvals_sa, kericho.csv, gplots (version 3.0.1) package, viridis (version 0.5.1) package
+*	SUPPLEMENTARY FIGS S1.1-10: Significance Analyses/Heatmap of p-value - Notional Beginning of Approach to Criticality & Notional Month of Critical Transition – pvals_tw, kericho.csv, gplots (version 3.0.1) package, viridis (version 0.5.1) package
+
+*	SUPPLEMENTARY FIGS S2.1-10: Significance Analyses/Heatmap of p-values  - Notional Month of Critical Transition & Bandwidth - pvals_sa, kericho.csv, gplots (version 3.0.1) package, viridis (version 0.5.1) package
 
 *	Significance Analyses/Heatmap of p-value for Spearman coefficient (not included in manuscript/supplement) – pvals_sa_spearman, kericho.csv, gplots (version 3.0.1) package, viridis (version 0.5.1) package
 
