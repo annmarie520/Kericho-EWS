@@ -8,13 +8,11 @@ All analyses were conducted in RStudio using R version 3.5.1
 
 The script Kericho-Computations.R generates all computations used in this manuscript and saves them. All outputs of this script are also available in this repository, with variable names explained below. This uses the package spaero (version 0.4.0) and the dataset kericho.csv
 
-The script Kericho-Figures.R generates all figures used in this manuscript and saves them. This script utilizes the files: kericho.csv, indics, cors, pvals, pvals_rf, pvals_tw, pvals_sa, and pvals_sa_spearman, pvals_rf_spearman. Each figure is separated into a self-contained section (demarcated by a comment with starting and ending ####). The figure sections and their required files and packages are as follows.
+The script Kericho-Figures.R generates all figures used in this manuscript and saves them. This script utilizes the files: kericho.csv, indics, cors, pvals, pvals_rf, pvals_tw, pvals_sa, and pvals_sa_spearman, pvals_rf_spearman. All nine files are provided in the Github. Each figure is separated into a self-contained section (demarcated by a comment with starting and ending ####). The figure sections and their required files and packages are as follows.
 
 *	FIG 1: Time series with approach to criticality shaded – kericho.csv
 
-*	FIG 2: Line graphs of each rolling window statistic over time (top), null distributions of tau for each statistic with test value shaded (bottom) – pvals, cors, indics, kericho.csv
-
-*	FIG 3: Rolling forecast p-values - pvals_rf
+*	FIG 2: Rolling forecast p-values - pvals_rf
 
 *	SUPPLEMENTARY FIG S3: rolling forecast p-values for Spearman’s correlation coefficient – pvals_rf_spearman, pvals_rf
 
@@ -24,11 +22,13 @@ The script Kericho-Figures.R generates all figures used in this manuscript and s
 
 *	Significance Analyses/Heatmap of p-value for Spearman coefficient (not included in manuscript/supplement) – pvals_sa_spearman, kericho.csv, gplots (version 3.0.1) package, viridis (version 0.5.1) package
 
+*	SUPPLEMENTARY FIG S4: Line graphs of each rolling window statistic over time (top), null distributions of tau for each statistic with test value shaded (bottom) – pvals, cors, indics, kericho.csv
+
 ## VARIABLE NAMES
 
 Monthly malaria incidence in Kericho, Kenya between January 1965 and November 2002 is given by kericho.csv
 
-The intermediate data for all stages of the analysis in the manuscript and supplementary analyses are provided in the Github (sixteen files). The table below gives variable names by the methods used to generate them (testing parameters by correlation coefficient used). 
+The table below gives variable names by the methods used to generate all sixteen intermediate data files (testing parameters by correlation coefficient used). The nine files used to generate figures are available in this repository and the seven remaining files are available upon request due to storage limitations. 
 
 |                                                                                                                  | <br>Correlation coefficient:<br>Kendall's τ | <br>Correlation Coefficient:<br>Spearman's ρ       |
 |------------------------------------------------------------------------------------------------------------------|----------------------------------------------|----------------------------------------------------|
