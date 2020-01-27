@@ -28,7 +28,7 @@ The script Kericho-Figures.R generates all figures used in this manuscript and s
 
 Monthly malaria incidence in Kericho, Kenya between January 1965 and November 2002 is given by kericho.csv
 
-The table below gives variable names by the methods used to generate all sixteen intermediate data files (testing parameters by correlation coefficient used). The nine files used to generate figures are available in this repository and the seven remaining files are available upon request due to storage limitations. 
+The table below gives variable names by the methods used to generate all sixteen intermediate data files (testing parameters by correlation coefficient used). Five intermediate files (cors_rf, cors_rf_spearman, cors_sa, cors_sa_spearman, and cors_tw) are excluded from this repository due to storage limitations and are available upon request.
 
 |                                                                                                                  | <br>Correlation coefficient:<br>Kendall's τ | <br>Correlation Coefficient:<br>Spearman's ρ       |
 |------------------------------------------------------------------------------------------------------------------|----------------------------------------------|----------------------------------------------------|
@@ -48,11 +48,11 @@ The table below gives variable names by the methods used to generate all sixteen
 
 ```cors``` and ```cors_spearman``` are matrices with 10,001 rows and 10 columns, with the first 10,000 rows reporting correlation coefficients for all ten indicators for the corresponding null model and the final row (cors[10001,]) giving the correlation coefficients for the Kericho data. 
 
-```cors_rf``` and ```cors_rf_spearman``` are lists of length 96 where the ith entry corresponds to early warning signal testing beginning in December 1981 and ending i months after April 1985. Each entry of this list is a matrix with the same format as cors and cors_spearman.
+```cors_rf``` and ```cors_rf_spearman``` are lists of length 96 where the ith entry corresponds to early warning signal testing beginning in December 1981 and ending i months after April 1985. Each entry of this list is a matrix with the same format as cors and cors_spearman. These files are not included in the repository and are available upon request due to storage limitations. 
 
-```cors_tw[[i]][[j]]``` returns a matrix with the same format as cors, where the ith entry corresponds to a notional month of beginning of approach to criticality i months since November 1987 and the jth entry corresponds to a notional month of beginning of approach to criticality i months since March 1993 (1 ≤ i ≤ 11 ; 1 ≤ j ≤ 11).
+```cors_tw[[i]][[j]]``` returns a matrix with the same format as cors, where the ith entry corresponds to a notional month of beginning of approach to criticality i months since November 1987 and the jth entry corresponds to a notional month of beginning of approach to criticality i months since March 1993 (1 ≤ i ≤ 11 ; 1 ≤ j ≤ 11). This is not included in the repository and is available upon request due to storage limitations.
 
-```cors_sa[[i]][[j]]``` and ```cors_sa_spearman[[i]][[j]]``` returns a matrix with the same format as cors and cors_spearman, where the ith entry corresponds to a notional month of critical transition  i months since March 1992 and the jth entry corresponds to a bandwidth size of 34+j (1 ≤ i ≤ 25 ; 1 ≤ j ≤ 11).
+```cors_sa[[i]][[j]]``` and ```cors_sa_spearman[[i]][[j]]``` returns a matrix with the same format as cors and cors_spearman, where the ith entry corresponds to a notional month of critical transition  i months since March 1992 and the jth entry corresponds to a bandwidth size of 34+j (1 ≤ i ≤ 25 ; 1 ≤ j ≤ 11). These files are not included in the repository and are available upon request due to storage limitations. 
 
 ```pvals``` and ```pvals_spearman``` returns a vector of the p-values corresponding to all ten indicators.
 
