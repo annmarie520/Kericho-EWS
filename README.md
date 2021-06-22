@@ -1,4 +1,5 @@
 # Kericho-EWS
+### Ann Marie
 code to accompany Evidence of Critical Slowing Down Prior to Malaria Resurgence in Kericho, Kenya
 
 This repository contains code to conduct all computations and generate all figures discussed in the manuscript:
